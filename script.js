@@ -9,16 +9,23 @@ let square7 = document.getElementById("square-7");
 let square8 = document.getElementById("square-8");
 let playButton = document.getElementById("play-again");
 let gameBoard = document.getElementById("game-board");
+let squares = [];
+squares.push(square0);
+squares.push(square1);
+squares.push(square2);
+squares.push(square3);
+squares.push(square4);
+squares.push(square5);
+squares.push(square6);
+squares.push(square7);
+squares.push(square8);
 
-square0.addEventListener("click", clickListener);
-square1.addEventListener("click", clickListener);
-square2.addEventListener("click", clickListener);
-square3.addEventListener("click", clickListener);
-square4.addEventListener("click", clickListener);
-square5.addEventListener("click", clickListener);
-square6.addEventListener("click", clickListener);
-square7.addEventListener("click", clickListener);
-square8.addEventListener("click", clickListener);
+function gameSetUp() {
+  for (i = 0; i < squares.length; i++) {
+    squares[i].addEventListener("click", clickListener);
+  }
+}
+gameSetUp();
 let currentTurn = "X";
 
 function clickListener() {
@@ -31,4 +38,9 @@ function clickListener() {
     currentTurn = "X";
     this.removeEventListener("click", clickListener);
   }
+
+  if (isGameOver()) {
+  }
 }
+
+function isGameOver() {}
