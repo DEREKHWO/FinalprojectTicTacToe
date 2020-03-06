@@ -9,6 +9,8 @@ let square7 = document.getElementById("square-7");
 let square8 = document.getElementById("square-8");
 let playButton = document.getElementById("play-again");
 let gameBoard = document.getElementById("game-board");
+let xScoreCounter = document.getElementById("scoreboard-x");
+let oScoreCounter = document.getElementById("scoreboard-o");
 let squares = [];
 squares.push(square0);
 squares.push(square1);
@@ -44,6 +46,7 @@ function clickListener() {
   xWinsIf();
   oWinsIf();
   tieGameIf();
+  endGame();
 }
 function xWinsIf() {
   if (
@@ -51,58 +54,49 @@ function xWinsIf() {
     squares[1].innerText == "X" &&
     squares[2].innerText == "X"
   ) {
-    //We're in the
-    endGame();
-    //now.
+    console.log("x wins");
     return true;
   } else if (
     squares[3].innerText == "X" &&
     squares[4].innerText == "X" &&
     squares[5].innerText == "X"
   ) {
-    endGame();
     return true;
   } else if (
     squares[6].innerText == "X" &&
     squares[7].innerText == "X" &&
     squares[8].innerText == "X"
   ) {
-    endGame();
     return true;
   } else if (
     squares[0].innerText == "X" &&
     squares[3].innerText == "X" &&
     squares[6].innerText == "X"
   ) {
-    endGame();
     return true;
   } else if (
     squares[1].innerText == "X" &&
     squares[4].innerText == "X" &&
     squares[7].innerText == "X"
   ) {
-    endGame();
     return true;
   } else if (
     squares[2].innerText == "X" &&
     squares[5].innerText == "X" &&
     squares[8].innerText == "X"
   ) {
-    endGame();
     return true;
   } else if (
     squares[0].innerText == "X" &&
     squares[4].innerText == "X" &&
     squares[8].innerText == "X"
   ) {
-    endGame();
     return true;
   } else if (
     squares[2].innerText == "X" &&
     squares[4].innerText == "X" &&
     squares[6].innerText == "X"
   ) {
-    endGame();
     return true;
   }
 }
@@ -113,67 +107,82 @@ function oWinsIf() {
     squares[1].innerText == "O" &&
     squares[2].innerText == "O"
   ) {
-    endGame();
     return true;
   } else if (
     squares[3].innerText == "O" &&
     squares[4].innerText == "O" &&
     squares[5].innerText == "O"
   ) {
-    endGame();
     return true;
   } else if (
     squares[6].innerText == "O" &&
     squares[7].innerText == "O" &&
     squares[8].innerText == "O"
   ) {
-    endGame();
     return true;
   } else if (
     squares[0].innerText == "O" &&
     squares[3].innerText == "O" &&
     squares[6].innerText == "O"
   ) {
-    endGame();
     return true;
   } else if (
     squares[1].innerText == "O" &&
     squares[4].innerText == "O" &&
     squares[7].innerText == "O"
   ) {
-    endGame();
     return true;
   } else if (
     squares[2].innerText == "O" &&
     squares[5].innerText == "O" &&
     squares[8].innerText == "O"
   ) {
-    endGame();
     return true;
   } else if (
     squares[0].innerText == "O" &&
     squares[4].innerText == "O" &&
     squares[8].innerText == "O"
   ) {
-    endGame();
     return true;
   } else if (
     squares[2].innerText == "O" &&
     squares[4].innerText == "O" &&
     squares[6].innerText == "O"
   ) {
-    endGame();
     return true;
   }
 }
 
 function tieGameIf() {
   if (turnCounter == 9 && xWinsIf() != true && oWinsIf() != true) {
-    endGame();
+    console.log("tie test");
     return true;
   }
 }
-function endGame() {}
+function endGame() {
+  if (xWinsIf()) {
+    for (i = 0; i < squares.length; i++) {
+      squares[i].removeEventListener("click", clickListener);
+    }
+    gameBoard.innerText = "Congrats, X won!! Press play again to play again";
+    let xCurrentScore = 0;
+    xScoreCounter.innerText = xCurrentScore += 1;
+    localStorage.setItem("X score", xCurrentScore);
+  } else if (oWinsIf()) {
+    for (i = 0; i < squares.length; i++) {
+      squares[i].removeEventListener("click", clickListener);
+    }
+    gameBoard.innerText = "Congrats, O won!! Press play again to play again";
+    let oCurrentScore = 0;
+    oScoreCounter.innerText = oCurrentScore += 1;
+    localStorage.setItem("O score", oCurrentScore);
+  } else if (tieGameIf()) {
+    for (i = 0; i < squares.length; i++) {
+      squares[i].removeEventListener("click", clickListener);
+    }
+    gameBoard.innerText = "Sorry, no one won. Press play again to play again";
+  }
+}
 
 // isGameOver (true/false)
 // Did X win?
