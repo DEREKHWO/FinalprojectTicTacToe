@@ -21,26 +21,25 @@ squares.push(square5);
 squares.push(square6);
 squares.push(square7);
 squares.push(square8);
-
 gameSetUp();
 function gameSetUp() {
   for (i = 0; i < squares.length; i++) {
-    squares[i].addEventListener("click", clickListener);
+    squares[i].addEventListener("click", turnClickListener);
   }
 }
 let currentTurn = "X";
 let turnCounter = 0;
-function clickListener() {
+function turnClickListener() {
   if (currentTurn == "X") {
     this.innerText = "X";
     currentTurn = "O";
     turnCounter++;
-    this.removeEventListener("click", clickListener);
+    this.removeEventListener("click", turnClickListener);
   } else {
     this.innerText = "O";
     currentTurn = "X";
     turnCounter++;
-    this.removeEventListener("click", clickListener);
+    this.removeEventListener("click", turnClickListener);
   }
   xWinsIf();
   oWinsIf();
@@ -53,7 +52,6 @@ function xWinsIf() {
     squares[1].innerText == "X" &&
     squares[2].innerText == "X"
   ) {
-    console.log("x wins");
     return true;
   } else if (
     squares[3].innerText == "X" &&
@@ -154,7 +152,6 @@ function oWinsIf() {
 
 function tieGameIf() {
   if (turnCounter == 9 && xWinsIf() != true && oWinsIf() != true) {
-    console.log("tie test");
     return true;
   }
 }
@@ -163,21 +160,21 @@ let oCurrentScore = 0;
 function endGame() {
   if (xWinsIf()) {
     for (i = 0; i < squares.length; i++) {
-      squares[i].removeEventListener("click", clickListener);
+      squares[i].removeEventListener("click", turnClickListener);
     }
     alert("Congrats, X won!! Press play again to play again");
     xScoreCounter.innerText = xCurrentScore += 1;
     localStorage.setItem("X score", xCurrentScore);
   } else if (oWinsIf()) {
     for (i = 0; i < squares.length; i++) {
-      squares[i].removeEventListener("click", clickListener);
+      squares[i].removeEventListener("click", turnClickListener);
     }
     alert("Congrats, O won!! Press play again to play again");
     oScoreCounter.innerText = oCurrentScore += 1;
     localStorage.setItem("O score", oCurrentScore);
   } else if (tieGameIf()) {
     for (i = 0; i < squares.length; i++) {
-      squares[i].removeEventListener("click", clickListener);
+      squares[i].removeEventListener("click", turnClickListener);
     }
     alert("Sorry, no one won. Press play again to play again");
   }
@@ -193,9 +190,14 @@ function playButtonClickListener(event) {
   currentTurn = "X";
   gameSetUp();
 }
-// isGameOver (true/false)
-// Did X win?
-// Did Y win?
-// Is the game cats?
-
-//
+let xScoreCount = localStorage.getItem("X score");
+let oScoreCount = localStorage.getItem("O score");
+function gameDefaultState() {
+  if (xScoreCount != null) {
+    xScoreCounter.innerText = xScoreCount;
+  }
+  if (oScoreCount != null) {
+    oScoreCounter.innerText = oScoreCount;
+  }
+}
+gameDefaultState();
