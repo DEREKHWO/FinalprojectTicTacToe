@@ -20,12 +20,13 @@ squares.push(square6);
 squares.push(square7);
 squares.push(square8);
 
+gameSetUp();
 function gameSetUp() {
   for (i = 0; i < squares.length; i++) {
     squares[i].addEventListener("click", clickListener);
   }
 }
-gameSetUp();
+
 let currentTurn = "X";
 
 function clickListener() {
@@ -38,9 +39,117 @@ function clickListener() {
     currentTurn = "X";
     this.removeEventListener("click", clickListener);
   }
-
-  if (isGameOver()) {
+  xWinsIf();
+  oWinsIf();
+}
+function xWinsIf() {
+  if (
+    squares[0].innerText == "X" &&
+    squares[1].innerText == "X" &&
+    squares[2].innerText == "X"
+  ) {
+    isGameOver();
+  } else if (
+    squares[3].innerText == "X" &&
+    squares[4].innerText == "X" &&
+    squares[5].innerText == "X"
+  ) {
+    isGameOver();
+  } else if (
+    squares[6].innerText == "X" &&
+    squares[7].innerText == "X" &&
+    squares[8].innerText == "X"
+  ) {
+    isGameOver();
+  } else if (
+    squares[0].innerText == "X" &&
+    squares[3].innerText == "X" &&
+    squares[6].innerText == "X"
+  ) {
+    isGameOver();
+  } else if (
+    squares[1].innerText == "X" &&
+    squares[4].innerText == "X" &&
+    squares[7].innerText == "X"
+  ) {
+    isGameOver();
+  } else if (
+    squares[2].innerText == "X" &&
+    squares[5].innerText == "X" &&
+    squares[8].innerText == "X"
+  ) {
+    isGameOver();
+  } else if (
+    squares[0].innerText == "X" &&
+    squares[4].innerText == "X" &&
+    squares[8].innerText == "X"
+  ) {
+    isGameOver();
+  } else if (
+    squares[2].innerText == "X" &&
+    squares[4].innerText == "X" &&
+    squares[6].innerText == "X"
+  ) {
+    isGameOver();
   }
 }
 
+function oWinsIf() {
+  if (
+    squares[0].innerText == "O" &&
+    squares[1].innerText == "O" &&
+    squares[2].innerText == "O"
+  ) {
+    isGameOver();
+  } else if (
+    squares[3].innerText == "O" &&
+    squares[4].innerText == "O" &&
+    squares[5].innerText == "O"
+  ) {
+    isGameOver();
+  } else if (
+    squares[6].innerText == "O" &&
+    squares[7].innerText == "O" &&
+    squares[8].innerText == "O"
+  ) {
+    isGameOver();
+  } else if (
+    squares[0].innerText == "O" &&
+    squares[3].innerText == "O" &&
+    squares[6].innerText == "O"
+  ) {
+    isGameOver();
+  } else if (
+    squares[1].innerText == "O" &&
+    squares[4].innerText == "O" &&
+    squares[7].innerText == "O"
+  ) {
+    isGameOver();
+  } else if (
+    squares[2].innerText == "O" &&
+    squares[5].innerText == "O" &&
+    squares[8].innerText == "O"
+  ) {
+    isGameOver();
+  } else if (
+    squares[0].innerText == "O" &&
+    squares[4].innerText == "O" &&
+    squares[8].innerText == "O"
+  ) {
+    isGameOver();
+  } else if (
+    squares[2].innerText == "O" &&
+    squares[4].innerText == "O" &&
+    squares[6].innerText == "O"
+  ) {
+    isGameOver();
+  }
+}
 function isGameOver() {}
+
+// isGameOver (true/false)
+// Did X win?
+// Did Y win?
+// Is the game cats?
+
+//
