@@ -28,19 +28,22 @@ function gameSetUp() {
 }
 
 let currentTurn = "X";
-
+let turnCounter = 0;
 function clickListener() {
   if (currentTurn == "X") {
     this.innerText = "X";
     currentTurn = "O";
+    turnCounter++;
     this.removeEventListener("click", clickListener);
   } else {
     this.innerText = "O";
     currentTurn = "X";
+    turnCounter++;
     this.removeEventListener("click", clickListener);
   }
   xWinsIf();
   oWinsIf();
+  tieGameIf();
 }
 function xWinsIf() {
   if (
@@ -48,49 +51,59 @@ function xWinsIf() {
     squares[1].innerText == "X" &&
     squares[2].innerText == "X"
   ) {
-    isGameOver();
+    //We're in the
+    endGame();
+    //now.
+    return true;
   } else if (
     squares[3].innerText == "X" &&
     squares[4].innerText == "X" &&
     squares[5].innerText == "X"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[6].innerText == "X" &&
     squares[7].innerText == "X" &&
     squares[8].innerText == "X"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[0].innerText == "X" &&
     squares[3].innerText == "X" &&
     squares[6].innerText == "X"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[1].innerText == "X" &&
     squares[4].innerText == "X" &&
     squares[7].innerText == "X"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[2].innerText == "X" &&
     squares[5].innerText == "X" &&
     squares[8].innerText == "X"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[0].innerText == "X" &&
     squares[4].innerText == "X" &&
     squares[8].innerText == "X"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[2].innerText == "X" &&
     squares[4].innerText == "X" &&
     squares[6].innerText == "X"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   }
 }
 
@@ -100,52 +113,67 @@ function oWinsIf() {
     squares[1].innerText == "O" &&
     squares[2].innerText == "O"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[3].innerText == "O" &&
     squares[4].innerText == "O" &&
     squares[5].innerText == "O"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[6].innerText == "O" &&
     squares[7].innerText == "O" &&
     squares[8].innerText == "O"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[0].innerText == "O" &&
     squares[3].innerText == "O" &&
     squares[6].innerText == "O"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[1].innerText == "O" &&
     squares[4].innerText == "O" &&
     squares[7].innerText == "O"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[2].innerText == "O" &&
     squares[5].innerText == "O" &&
     squares[8].innerText == "O"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[0].innerText == "O" &&
     squares[4].innerText == "O" &&
     squares[8].innerText == "O"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   } else if (
     squares[2].innerText == "O" &&
     squares[4].innerText == "O" &&
     squares[6].innerText == "O"
   ) {
-    isGameOver();
+    endGame();
+    return true;
   }
 }
-function isGameOver() {}
+
+function tieGameIf() {
+  if (turnCounter == 9 && xWinsIf() != true && oWinsIf() != true) {
+    endGame();
+    return true;
+  }
+}
+function endGame() {}
 
 // isGameOver (true/false)
 // Did X win?
