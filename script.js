@@ -40,12 +40,12 @@ function squaresClickListener() {
     turnCounter++;
     this.removeEventListener("click", squaresClickListener);
   }
-  setTimeout(xWinsIf, 25);
-  setTimeout(oWinsIf, 25);
-  setTimeout(tieGameIf, 25);
-  setTimeout(endGame, 25);
+  setTimeout(checkIfXWins, 25);
+  setTimeout(checkIfOWins, 25);
+  setTimeout(checkIfTieGame, 25);
+  setTimeout(checkIfGameIsOver, 25);
 }
-function xWinsIf() {
+function checkIfXWins() {
   if (
     squares[0].innerText == "X" &&
     squares[1].innerText == "X" &&
@@ -97,7 +97,7 @@ function xWinsIf() {
   }
 }
 
-function oWinsIf() {
+function checkIfOWins() {
   if (
     squares[0].innerText == "O" &&
     squares[1].innerText == "O" &&
@@ -149,45 +149,57 @@ function oWinsIf() {
   }
 }
 
-function tieGameIf() {
-  if (turnCounter == 9 && xWinsIf() != true && oWinsIf() != true) {
+function checkIfTieGame() {
+  if (turnCounter == 9 && checkIfXWins() != true && checkIfOWins() != true) {
     return true;
   }
 }
 
+let xCurrentScore = 0;
+let oCurrentScore = 0;
 function scoreCounter() {
-  let xCurrentScore = 0;
-  let oCurrentScore = 0;
-  if (xWinsIf()) {
+  if (checkIfXWins()) {
     xScoreCounter.innerText = xCurrentScore += 1;
     localStorage.setItem("X score", xCurrentScore);
   }
-  if (oWinsIf()) {
-    oScoreCounter.innerText = xCurrentScore += 1;
+  if (checkIfOWins()) {
+    oScoreCounter.innerText = oCurrentScore += 1;
     localStorage.setItem("X score", oCurrentScore);
   }
 }
 let xScoreCount = localStorage.getItem("X score");
 let oScoreCount = localStorage.getItem("O score");
 
-function endGame() {
-  if (xWinsIf()) {
+function whenGameIsOver() {
+  if (checkIfXWins()) {
     for (i = 0; i < squares.length; i++) {
       squares[i].removeEventListener("click", squaresClickListener);
     }
     alert("Congrats, X won!! Press play again to play again");
-    scoreCounter();
-  } else if (oWinsIf()) {
+  }
+  if (checkIfOWins()) {
     for (i = 0; i < squares.length; i++) {
       squares[i].removeEventListener("click", squaresClickListener);
     }
     alert("Congrats, O won!! Press play again to play again");
-    scoreCounter();
-  } else if (tieGameIf()) {
+  }
+  if (checkIfTieGame()) {
     for (i = 0; i < squares.length; i++) {
       squares[i].removeEventListener("click", squaresClickListener);
     }
     alert("Sorry, no one won. Press play again to play again");
+  }
+}
+
+function checkIfGameIsOver() {
+  if (checkIfXWins()) {
+    whenGameIsOver();
+    scoreCounter();
+  } else if (checkIfOWins()) {
+    whenGameIsOver();
+    scoreCounter();
+  } else if (checkIfTieGame()) {
+    whenGameIsOver();
   }
 }
 
