@@ -8,8 +8,8 @@ let square6 = document.getElementById("square-6");
 let square7 = document.getElementById("square-7");
 let square8 = document.getElementById("square-8");
 let playAgainButton = document.getElementById("play-again");
-let xScoreCounter = document.getElementById("scoreboard-x");
-let oScoreCounter = document.getElementById("scoreboard-o");
+let xScoreboard = document.getElementById("scoreboard-x");
+let oScoreboard = document.getElementById("scoreboard-o");
 let squares = [];
 squares.push(square0);
 squares.push(square1);
@@ -159,11 +159,11 @@ let xCurrentScore = 0;
 let oCurrentScore = 0;
 function scoreCounter() {
   if (checkIfXWins()) {
-    xScoreCounter.innerText = xCurrentScore += 1;
+    xScoreboard.innerText = xCurrentScore += 1;
     localStorage.setItem("X score", xCurrentScore);
   }
   if (checkIfOWins()) {
-    oScoreCounter.innerText = oCurrentScore += 1;
+    oScoreboard.innerText = oCurrentScore += 1;
     localStorage.setItem("X score", oCurrentScore);
   }
 }
@@ -215,10 +215,10 @@ function playAgainButtonClickListener(event) {
 }
 function gameDefaultState() {
   if (xScoreCount != null) {
-    xScoreCounter.innerText = xScoreCount;
+    xScoreboard.innerText = xScoreCount;
   }
   if (oScoreCount != null) {
-    oScoreCounter.innerText = oScoreCount;
+    oScoreboard.innerText = oScoreCount;
   }
 }
 gameDefaultState();
