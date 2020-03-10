@@ -40,10 +40,10 @@ function squaresClickListener() {
     turnCounter++;
     this.removeEventListener("click", squaresClickListener);
   }
-  xWinsIf();
-  oWinsIf();
-  tieGameIf();
-  endGame();
+  setTimeout(xWinsIf, 25);
+  setTimeout(oWinsIf, 25);
+  setTimeout(tieGameIf, 25);
+  setTimeout(endGame, 25);
 }
 function xWinsIf() {
   if (
@@ -154,23 +154,35 @@ function tieGameIf() {
     return true;
   }
 }
-let xCurrentScore = 0;
-let oCurrentScore = 0;
+
+function scoreCounter() {
+  let xCurrentScore = 0;
+  let oCurrentScore = 0;
+  if (xWinsIf()) {
+    xScoreCounter.innerText = xCurrentScore += 1;
+    localStorage.setItem("X score", xCurrentScore);
+  }
+  if (oWinsIf()) {
+    oScoreCounter.innerText = xCurrentScore += 1;
+    localStorage.setItem("X score", oCurrentScore);
+  }
+}
+let xScoreCount = localStorage.getItem("X score");
+let oScoreCount = localStorage.getItem("O score");
+
 function endGame() {
   if (xWinsIf()) {
     for (i = 0; i < squares.length; i++) {
       squares[i].removeEventListener("click", squaresClickListener);
     }
     alert("Congrats, X won!! Press play again to play again");
-    xScoreCounter.innerText = xCurrentScore += 1;
-    localStorage.setItem("X score", xCurrentScore);
+    scoreCounter();
   } else if (oWinsIf()) {
     for (i = 0; i < squares.length; i++) {
       squares[i].removeEventListener("click", squaresClickListener);
     }
     alert("Congrats, O won!! Press play again to play again");
-    oScoreCounter.innerText = oCurrentScore += 1;
-    localStorage.setItem("O score", oCurrentScore);
+    scoreCounter();
   } else if (tieGameIf()) {
     for (i = 0; i < squares.length; i++) {
       squares[i].removeEventListener("click", squaresClickListener);
@@ -189,8 +201,6 @@ function playAgainButtonClickListener(event) {
   currentTurn = "X";
   gameSetUp();
 }
-let xScoreCount = localStorage.getItem("X score");
-let oScoreCount = localStorage.getItem("O score");
 function gameDefaultState() {
   if (xScoreCount != null) {
     xScoreCounter.innerText = xScoreCount;
