@@ -7,8 +7,7 @@ let square5 = document.getElementById("square-5");
 let square6 = document.getElementById("square-6");
 let square7 = document.getElementById("square-7");
 let square8 = document.getElementById("square-8");
-let playButton = document.getElementById("play-again");
-let gameBoard = document.getElementById("game-board");
+let playAgainButton = document.getElementById("play-again");
 let xScoreCounter = document.getElementById("scoreboard-x");
 let oScoreCounter = document.getElementById("scoreboard-o");
 let squares = [];
@@ -180,8 +179,8 @@ function endGame() {
   }
 }
 
-playButton.addEventListener("click", playButtonClickListener);
-function playButtonClickListener(event) {
+playAgainButton.addEventListener("click", playAgainButtonClickListener);
+function playAgainButtonClickListener(event) {
   event.preventDefault();
   for (i = 0; i < squares.length; i++) {
     squares[i].innerText = null;
