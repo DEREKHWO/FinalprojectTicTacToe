@@ -158,14 +158,11 @@ function checkIfTieGame() {
   }
 }
 
-let xCurrentScore;
-let oCurrentScore;
+let xCurrentScore = 0;
+let oCurrentScore = 0;
 function scoreCounter() {
   if (checkIfXWins()) {
-    let xCurrentScoreCount = parseInt(xCurrentScore);
-    xCurrentScoreCount += 1;
-    xScoreboard.innerText = xCurrentScoreCount;
-    xCurrentScore = xCurrentScoreCount;
+    xScoreboard.innerText = xCurrentScore += 1;
     localStorage.setItem("X score", xCurrentScore);
   }
   if (checkIfOWins()) {
@@ -222,7 +219,6 @@ let oScoreCount = localStorage.getItem("O score");
 function gameDefaultState() {
   currentTurnDisplay.innerText = "X";
   if (xStoredScoreCount != null) {
-    let xScore = parseInt(xStoredScoreCount);
     xScoreboard.innerText = xScore;
   }
   if (oScoreCount != null) {
