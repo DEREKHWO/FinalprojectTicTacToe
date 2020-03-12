@@ -10,6 +10,7 @@ let square8 = document.getElementById("square-8");
 let playAgainButton = document.getElementById("play-again");
 let xScoreboard = document.getElementById("scoreboard-x");
 let oScoreboard = document.getElementById("scoreboard-o");
+let currentTurnDisplay = document.getElementById("turn");
 let squares = [];
 squares.push(square0);
 squares.push(square1);
@@ -32,11 +33,13 @@ function squaresClickListener() {
   if (currentTurn == "X") {
     this.innerText = "X";
     currentTurn = "O";
+    currentTurnDisplay.innerText = "O";
     turnCounter++;
     this.removeEventListener("click", squaresClickListener);
   } else {
     this.innerText = "O";
     currentTurn = "X";
+    currentTurnDisplay.innerText = "X";
     turnCounter++;
     this.removeEventListener("click", squaresClickListener);
   }
@@ -155,11 +158,14 @@ function checkIfTieGame() {
   }
 }
 
-let xCurrentScore = 0;
-let oCurrentScore = 0;
+let xCurrentScore;
+let oCurrentScore;
 function scoreCounter() {
   if (checkIfXWins()) {
-    xScoreboard.innerText = xCurrentScore += 1;
+    let xCurrentScoreCount = parseInt(xCurrentScore);
+    xCurrentScoreCount += 1;
+    xScoreboard.innerText = xCurrentScoreCount;
+    xCurrentScore = xCurrentScoreCount;
     localStorage.setItem("X score", xCurrentScore);
   }
   if (checkIfOWins()) {
@@ -167,8 +173,6 @@ function scoreCounter() {
     localStorage.setItem("X score", oCurrentScore);
   }
 }
-let xScoreCount = localStorage.getItem("X score");
-let oScoreCount = localStorage.getItem("O score");
 
 function whenGameIsOver() {
   if (checkIfXWins()) {
@@ -213,9 +217,13 @@ function playAgainButtonClickListener(event) {
   currentTurn = "X";
   gameSetUp();
 }
+let xStoredScoreCount = localStorage.getItem("X score");
+let oScoreCount = localStorage.getItem("O score");
 function gameDefaultState() {
-  if (xScoreCount != null) {
-    xScoreboard.innerText = xScoreCount;
+  currentTurnDisplay.innerText = "X";
+  if (xStoredScoreCount != null) {
+    let xScore = parseInt(xStoredScoreCount);
+    xScoreboard.innerText = xScore;
   }
   if (oScoreCount != null) {
     oScoreboard.innerText = oScoreCount;
